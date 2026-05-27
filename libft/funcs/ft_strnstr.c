@@ -6,11 +6,10 @@
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 17:04:23 by dichacon          #+#    #+#             */
-/*   Updated: 2026/05/18 18:02:13 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/05/27 12:28:30 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
