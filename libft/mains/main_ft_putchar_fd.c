@@ -8,7 +8,7 @@ int main(void)
 	int		fd;
 	char	out[2];
 
-	fd = open("test.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fd = open("ft_putchar_test.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		write(2, "Error al abrir el archivo\n", 26);
