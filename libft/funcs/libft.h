@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelona.com>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 11:06:22 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/02 11:41:45 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/02 17:27:43 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -46,4 +46,12 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
+void	ft_lstadd_back(t_list **lst, t_list *new);
 #endif
