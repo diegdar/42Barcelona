@@ -6,15 +6,15 @@
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:27:48 by dichacon          #+#    #+#             */
-/*   Updated: 2026/05/27 19:18:52 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/02 12:48:05 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <stdlib.h>
 
-static long	calculate_size(long n)
+static size_t	calculate_size(long n)
 {
-	long	count;
+	size_t	count;
 
 	if (n == 0)
 		return (1);
@@ -27,39 +27,31 @@ static long	calculate_size(long n)
 	return (count);
 }
 
-static void	convert_int_to_str(long n_long, char *end)
-{
-	while (n_long > 0)
-	{
-		*end-- = (n_long % 10) + '0';
-		n_long /= 10;
-	}
-}
-
 char	*ft_itoa(int n)
 {
 	char	*strnum;
 	size_t	size;
-	char	*end;
-	size_t	is_negative;
 	long	n_long;
 
-	size = 0;
 	n_long = n;
-	is_negative = (n < 0);
-	if (is_negative)
+	if (n_long < 0)
 		n_long = -n_long;
-	size += calculate_size(n_long) + is_negative;
+	size = calculate_size(n_long);
+	if (n < 0)
+		size++;
 	strnum = malloc(sizeof(char) * (size + 1));
+	if (!strnum)
+		return (NULL);
 	strnum[size] = '\0';
-	if (n_long == 0)
+	while (size--)
 	{
-		strnum[0] = '0';
+		strnum[size] = (n_long % 10) + '0';
+		n_long /= 10;
+	}
+	if (n < 0)
+	{
+		strnum[0] = '-';
 		return (strnum);
 	}
-	end = strnum + size - 1;
-	convert_int_to_str(n_long, end);
-	if (is_negative)
-		strnum[0] = '-';
 	return (strnum);
 }
