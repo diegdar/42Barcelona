@@ -1,30 +1,50 @@
 #include "libft.h"
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdio.h>
 
-int main(void)
+void	fn_test(char *test_name, char *s, size_t len)
 {
-	int		fd;
-	char	out[18];
+	int	fd;
+	char	buff[len + 1];//+ 1 para el '\0'
+	size_t	read_bytes;
 
-	fd = open("ft_putstr_fd_test.txt", O_RDWR | O_CREAT, 0644);
+	printf("\n--- Test: %s ---", test_name);
+
+	fd = open("ft_putendl_fd_test.txt", O_RDWR | O_CREAT |O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		write(2, "Error al abrir el archivo\n", 26);
-		return (1);
+		return ;
 	}
 
-	ft_putstr_fd("Hola ft_putstr_fd", fd);
-
-	/* Volver al inicio del archivo para poder leer */
+	ft_putstr_fd(s, fd);
 	lseek(fd, 0, SEEK_SET);
 
-	read(fd, out, 17);
-	out[18] = '\0';
+	read_bytes =read(fd, buff, len);
+	buff[read_bytes] = '\0';
 
-	printf("Contenido del archivo: '%s'\n", out);
+	printf("\nContenido del archivo: '%s'\n", buff);
 
 	close(fd);
+}
+
+int	main(void)
+{
+	char	*s;
+	size_t	len;
+
+	s = "La magia de C";
+	len = ft_strlen(s);
+	fn_test("Paso de un string con caracteres imprimibles", s, len);
+
+	s = "";
+	len = ft_strlen(s);
+	fn_test("Paso de un string vacio", s, len);
+
+	s = NULL;
+	len = 1;
+	fn_test("Paso de un valor NULL como string", s, len);
+
 	return (0);
 }

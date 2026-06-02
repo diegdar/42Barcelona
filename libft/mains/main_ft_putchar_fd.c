@@ -6,7 +6,7 @@
 int main(void)
 {
 	int		fd;
-	char	out[2];
+	char	buff[2];
 
 	fd = open("ft_putchar_test.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
@@ -20,10 +20,10 @@ int main(void)
 	/* Volver al inicio del archivo para poder leer */
 	lseek(fd, 0, SEEK_SET);
 
-	read(fd, out, 1);
-	out[1] = '\0';
+	read(fd, buff, 1);
+	buff[1] = '\0';
 
-	printf("Contenido del archivo: '%s'\n", out);
+	printf("Contenido del archivo: '%s'\n", buff);
 
 	close(fd);
 	return (0);
