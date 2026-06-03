@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelona.com>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 11:06:22 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/02 17:27:43 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/03 15:40:51 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -53,5 +53,5 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstnew(void *content);
 #endif
