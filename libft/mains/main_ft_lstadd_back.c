@@ -5,32 +5,42 @@
 int	main(void)
 {
 	t_list	*head;
-	t_list	*new;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*node3;
 	t_list	*current;
-	int	*num_1;
-	int	*num_2;
 
-	head = malloc(sizeof(t_list));
-	new = malloc(sizeof(t_list));
-	num_1 = malloc(sizeof(int));
-	num_2 = malloc(sizeof(int));
+	node1 = malloc(sizeof(t_list));
+	node2 = malloc(sizeof(t_list));
+	node3 = malloc(sizeof(t_list));
 
-	*num_1 = 10;
-	*num_2 = 20;
-
-	head->content = num_1;
-	new->content = num_2;
-	ft_lstadd_back(&head, new);
-	current = head;
-	while (current != NULL)
+	if (!node1 || !node2 || !node3)
 	{
-		printf("Nodo: %d\n",*(int *)current->content);
-		current = current->next;
+		printf("\nNo se ha podido asignar memoria en alguno nodo");
+		free(node1);
+		free(node2);
+		free(node3);
+		return (1);
 	}
 
-	free(head);
-	free(new);
-	free(num_1);
-	free(num_2);
+	head = node1;
+	node1->content = "node1";
+	node2->content = "node2";
+	node3->content = "new_node";
+	node1->next = node2;
+	node2->next = NULL;
+	node3->next = NULL;
+
+	ft_lstadd_back(&head, node3);
+
+	current = head;
+	while (current->next != NULL)
+		current = current->next;
+
+	printf("\n**El ultimo node es: %s", (char *)current->content);
+
+	free(node1);
+	free(node2);
+	free(node3);
 	return (0);
 }
