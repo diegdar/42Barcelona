@@ -6,11 +6,11 @@
 #    By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/27 11:50:35 by dichacon          #+#    #+#              #
-#    Updated: 2026/04/27 15:47:27 by dichacon         ###   ########.fr        #
+#    Updated: 2026/06/08 13:12:56 by dichacon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libft.a
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INC = libft.h
 
@@ -61,10 +61,11 @@ SRC =	ft_atoi.c \
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
-$(NAME): $(OBJS)
+
+$(NAME): $(OBJS) Makefile libft.h
 	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c $(INC) libft.h
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJS)

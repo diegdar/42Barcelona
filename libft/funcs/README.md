@@ -141,7 +141,7 @@ libft/
 
 ### Compiler and Flags
 
-The project is compiled using either `cc` or `gcc` with the following flags:
+The project is compiled using either `cc` with the following flags:
 
 ```bash
 -Wall -Wextra -Werror
@@ -300,7 +300,7 @@ Once the library has been generated, it can be linked with any C program.
 Example:
 
 ```bash
-gcc -Wall -Wextra -Werror main.c libft.a -I. -o program
+cc -Wall -Wextra -Werror main.c libft.a -I. -o program
 ```
 
 Explanation:
