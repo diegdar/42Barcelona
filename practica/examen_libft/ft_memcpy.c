@@ -1,63 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 15:56:08 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/09 16:29:39 by dichacon         ###   ########.fr       */
+/*   Created: 2026/06/09 17:58:45 by dichacon          #+#    #+#             */
+/*   Updated: 2026/06/09 18:47:25 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
+#include <stddef.h>
 
-size_t	ft_strlen(const char *s)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
+	unsigned char	*d;
+	unsigned char	*s;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*copy;
-	size_t	i;
-
-	copy = malloc(sizeof(char) * ft_strlen(s) + 1);
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (s[i])
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	while (i < n)
 	{
-		copy[i] = s[i];
+		d[i] = s[i];
 		i++;
 	}
-	copy[i] = '\0';
-	return (copy);
+	return (dest);
 }
 
-// ----- PRUEBAS -------
-
+// ---- PRUEBAS ------
 #include <stdio.h>
 #include <stdlib.h>
 
-void	strlen_test(char *test_name, char *s)
+void	fn_test(char *test_name, char *src, size_t n)
 {
+	char	res[20];
+
 	printf("\n--- TEST: %s ---", test_name);
-	printf("\nValor de s %s ---", s);
-	printf("\nValor devuelvo por ft_fn %s \n", ft_strdup(s));
+	printf("\n*Valor de s: %s", src);
+	ft_memcpy(res, src, n);
+	printf("\n*Valor devuelvo por ft_fn: %s \n", res);
 }
 
 int	main(void)
 {
-//ft_strlen
-	char	*s;
+	char	*src = "hola mundo";
+	size_t	n = 10;
 
-	s = "hola mundo";
-	strlen_test("\nPaso de una cadena", s);
+	fn_test("copia todo src", src, n);
 
 	return (0);
 }
