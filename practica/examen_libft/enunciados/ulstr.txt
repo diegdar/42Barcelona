@@ -1,0 +1,9 @@
+**Directorio de entrega: ulstr/
+**Archivos a entregar: ulstr.c
+**Funciones autorizadas: write
+
+Crear un programa que recibe un string que:
+-convierte todas las minusculas a mayusculas y todas las mayusculas a minusculas.
+-los demas caracteres no se tocan(no se ven afectados).
+-Si el numero de argumentos es diferente de 1 mostrar: '\n'.
+-Cuando no se pasa ningun argumento mostrar: '\n'.

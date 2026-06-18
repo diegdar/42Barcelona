@@ -1,0 +1,10 @@
+**Directorio de entrega: ex21/
+**Archivos a entregar: ft_range.c
+**Funciones autorizadas: malloc
+
+Crea una función ft_range que devuelva un array de enteros. Este array de
+enteros debe: 
+-contener todos los valores entre start y end (ambos incluidos).
+-Si el valor start es mayor o igual al valor end, debe devolverse un puntero nulo.
+-Este debe ser su prototipo: int *ft_range(int start, int end);
+

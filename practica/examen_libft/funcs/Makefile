@@ -6,21 +6,23 @@
 #    By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/08 13:44:58 by dichacon          #+#    #+#              #
-#    Updated: 2026/06/08 14:28:09 by dichacon         ###   ########.fr        #
+#    Updated: 2026/06/11 20:01:49 by dichacon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME = libft.a
+NAME = my_library.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INC = libft.h
+INC = my_library.h
 
-SRC = ft_isalpha
+SRC = ft_isalpha.c\
+			ft_memmove.c\
+	
 
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) Makefile libft.h
+$(NAME): $(OBJS) Makefile $(INC)
 		ar rcs $(NAME) $(OBJS)
 
 %.o: %.c

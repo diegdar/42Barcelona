@@ -9,7 +9,7 @@
 /*   Updated: 2026/06/08 14:28:46 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "my_library.h"
 
 int	ft_isalpha(int c)
 {
