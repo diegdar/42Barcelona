@@ -13,3 +13,6 @@ checker
 # Ignorar directorios de configuración
 *.swp
 
+# Ignorar notas
+notes.md
+
