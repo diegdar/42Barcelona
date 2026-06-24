@@ -6,11 +6,14 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:28:50 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/22 16:52:36 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/24 11:34:22 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# include <stddef.h>
+# include <stdlib.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42

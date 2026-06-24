@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/22 19:01:06 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/24 13:58:27 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -17,8 +17,10 @@ char	*get_next_line(int fd)
 	ssize_t	nrbytes;
 	char	*buffer;
 	char	*line;
-	int	i;
-	static int	j;
+	char	*rest;
+	size_t	line_len;
+//	int	i;
+//	static int	j;
 	static char	*storage;
 
 	if(fd < 0 || BUFFER_SIZE <= 0)
@@ -32,16 +34,49 @@ char	*get_next_line(int fd)
 		free(buffer);
 		return (NULL);
 	}
-	buffer[nr_bytes] = '\0';
+	
+	storage = ft_strdup(buffer);
+	while (nr_bytes > 0)
+	{
+		storage = ft_strchar(buffer, '\n');
+		line_len = storage - buffer;
+		if (line_len)
+		{
+			line = malloc(sizeof(char) * (line_len + 1));
+			if (!line)
+			{
+				free(buffer);
+				return (NULL);
+			}
+			storage = ft_strdup(rest);
+			return (line);
+		}
+		nr_bytes = read(fd, buffer, BUFFER_SIZE);
+//		storage = ft_strjoin(storage, buffer);
+	}
+
+
+/*
+	i = 0;
+	while (ft_strchr(storage, '\n') == NULL 
+		&& nr_bytes > 0)
+	{
+		nr_bytes = read(fd, buffer, BUFFER_SIZE);
+		storage = ft_strjoin(storage, buffer);
+
+	}
+*/
+
+/*
 	i = 0;
 	j = 0;
 	while (buffer[i])
 	{
 		if (buffer[i] == '\n')
-			return (buffer);
-		storage[j] = buffer[i];
+			return (line);
+		line[j] = buffer[i];
 		i++;
 		j++;
 	}
-
+*/
 }
