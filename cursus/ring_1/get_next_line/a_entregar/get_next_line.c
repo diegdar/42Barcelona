@@ -6,13 +6,13 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/24 19:42:56 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/25 18:30:53 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 #include <unistd.h>
 
-void	cut_excess(char *old_storage)
+char	*cut_excess(char *old_storage)
 {
 	char	*new_storage;
 	size_t	i;
@@ -20,22 +20,16 @@ void	cut_excess(char *old_storage)
 	i = 0;
 	while (old_storage[i] != '\n')
 		i++;
-	temp = ft_strndup(old_storage[i], ft_strlen(old_storage[i]);
+	new_storage = ft_strndup(&old_storage[i + 1], ft_strlen(&old_storage[i + 1]));
 	free(old_storage);
 	return (new_storage);
 }
 
-char	*get_next_line(int fd)
+char	*fill_storage(int fd, char *storage)
 {
-	ssize_t	nr_bytes;
 	char	*buffer;
-	char	*line;
-	char	*check_line;
-	size_t	line_len;
-	static char	*storage;
+	ssize_t	nr_bytes;
 
-	if(fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
@@ -49,10 +43,23 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buffer[nr_bytes] = '\0';
-		storage = ft_str_join_and_free(buffer, storage);
+		storage = ft_strjoin_with_free(buffer, storage);
 	}
 	free(buffer);
-	if (!storage || *storage)
+	return (storage);
+}
+
+char	*get_next_line(int fd)
+{
+	char	*line;
+	char	*check_line;
+	size_t	line_len;
+	static char	*storage;
+
+	if(fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	storage = fill_storage(fd, storage);
+	if (!storage || !*storage)
 		return (NULL);
 	check_line = ft_strchr(storage, '\n');
 	if (check_line)
@@ -67,4 +74,5 @@ char	*get_next_line(int fd)
 		free(storage);
 		storage = NULL;
 	}
+	return (line);
 }

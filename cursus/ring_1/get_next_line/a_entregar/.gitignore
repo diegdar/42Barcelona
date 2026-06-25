@@ -7,12 +7,10 @@ Makefile
 # Ignorar archivos ejecutables comunes y de prueba
 a.out
 *.out
-test
 checker
 
 # Ignorar directorios de configuración
 *.swp
+*.swo
 
-# Ignorar notas
-notes.md
 

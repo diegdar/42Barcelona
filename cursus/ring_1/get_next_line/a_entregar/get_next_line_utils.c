@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 19:26:05 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/24 19:39:28 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/25 13:12:53 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -16,8 +16,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (*s)
-		i++
+	while (s[i])
+		i++;
 	return (i);
 }
 
@@ -32,9 +32,9 @@ char	*ft_strndup(const char *s, size_t n)
 	if (!dup)
 		return (NULL);
 	i = 0;
-	while (s[i] || i < n)
+	while (s[i] && i < n)
 	{
-		dup[i] = s[i]
+		dup[i] = s[i];
 		i++;
 	}
 	dup[i] = '\0';
@@ -43,6 +43,8 @@ char	*ft_strndup(const char *s, size_t n)
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	while (1)
 	{
 		if (*s == (char)c)
@@ -54,43 +56,43 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	ft_copy_data(char *dest, const char *s1, const char *s2)
+void	ft_copy_data(char *dest, const char *storage, const char *buffer)
 {
 	size_t	i;
 
 	i = 0;
-	while (*s1)
+	while (*storage)
 	{
-		dest[i] = *s1;
-		s1++;
+		dest[i] = *storage;
+		storage++;
 		i++;
 	}
-	while (*s2)
+	while (*buffer)
 	{
-		dest[i] = *s2;
-		s2++;
+		dest[i] = *buffer;
+		buffer++;
 		i++;
 	}
 	dest[i] = '\0';
 }
 
-char	*ft_strjoin_with_free(char const *buffer, char const *storage)
+char	*ft_strjoin_with_free(char const *buffer, char *storage)
 {
 	char	*merger;
 
 	if (!buffer && !storage)
 		return (NULL);
 	if (!storage)
-		storage = ft_strndup("", 1);
+		storage = ft_strndup("", 0);
 	if(!storage)
 		return (NULL);
-	merger = malloc(sizeof(merger) * ((ft_strlen(buffer) + ft_strlen(storage) + 1));
+	merger = malloc(sizeof(char) * ((ft_strlen(buffer) + ft_strlen(storage) + 1)));
 	if (!merger)
 	{
 		free(storage);
 		return (NULL);
 	}
-	ft_copy_data(merger, buffer, storage);
+	ft_copy_data(merger, storage, buffer);
 	free(storage);
 	return (merger);
 }

@@ -1,9 +1,9 @@
 # Archivo de trabajo
-file =		"H o l a \n M u n d o  \n ¿  Q  u  é  t ' ' a  l  ?  \n" \0
-posiciones = 	 0 1 2 3 4  5 6 7 8 9  10 11 12 13 14 15 16 17 18 19 20  21
+file_test.txt =	"H o l a \n _ M u n d o  \n _  ¿  Q  u  é  _  t  a  l  ?  \n" \0
+posiciones = 	 0 1 2 3 4  5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  23
 
 # Macros utilizadas
-BUFFER_SIZE = 20;
+BUFFER_SIZE = 23;
 
 # Variables utilizadas dentro de get_next_line.c
 - int         i: para recorrer los caracteres del buffer
