@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("\nValor de line: '%s'", line);
+		printf("Valor de line: '%s'", line);
 		free(line);
 		line = get_next_line(fd);
 	}

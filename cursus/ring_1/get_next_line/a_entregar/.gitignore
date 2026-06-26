@@ -12,5 +12,5 @@ checker
 # Ignorar directorios de configuración
 *.swp
 *.swo
-
+*.gch
 
