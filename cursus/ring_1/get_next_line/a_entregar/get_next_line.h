@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:28:50 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/26 15:39:10 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/06/26 17:03:24 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 23
+#  define BUFFER_SIZE 4096 
 # endif
 
 char	*get_next_line(int fd);
