@@ -15,3 +15,5 @@ checker
 *.gch
 *.swn
 
+# Ignorar archivos que no quiero en el bonus
+le_*
