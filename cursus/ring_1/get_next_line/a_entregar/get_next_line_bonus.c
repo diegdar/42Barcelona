@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/29 19:47:22 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/02 19:12:58 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -58,7 +58,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	storage[fd]= fill_storage(fd, storage[fd]);
+	storage[fd] = fill_storage(fd, storage[fd]);
 	if (!storage[fd] || !*storage[fd])
 		return (NULL);
 	check_line = ft_strchr(storage[fd], '\n');
