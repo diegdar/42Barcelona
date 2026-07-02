@@ -14,6 +14,7 @@ checker
 *.swo
 *.gch
 *.swn
+gnl*/
 
 # Ignorar archivos que no quiero en el bonus
 le_*

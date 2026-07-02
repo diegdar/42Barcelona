@@ -74,6 +74,55 @@ The core challenge of this project lies in preserving text read "from the future
 Leak-Free Memory Management: Every utility function assumes a strict responsibility over freeing obsolete pointers. `ft_strjoin_with_free` safely deallocates the previous instance of `storage` before reassigning the newly joined memory slice, and `cut_excess` makes an exact duplicate of the leftover string following the `\n` before freeing the processed parent node.
 
 ---
+¡Claro! Vamos a actualizar el `README.md` para que incluya la sección del **Bonus**. He mantenido el estilo estructurado, limpio y técnico que ya tenías, añadiendo la explicación de cómo gestionas múltiples File Descriptors en paralelo usando un array de punteros estáticos (`static char *storage[OPEN_MAX]`) y cómo cambia la compilación.
+
+Copia y pega este bloque al final de tu archivo `README.md`:
+
+---
+
+## 🌟 Bonus Part: Multiple File Descriptors Management
+
+The bonus implementation elevates the function's capabilities by allowing it to manage **multiple file descriptors concurrently** without losing the reading thread of any of them.
+
+### How it Works Under the Hood
+
+Instead of using a simple static pointer, the bonus version implements a **static array of pointers** indexed by the file descriptor itself:
+
+```c
+static char *storage[OPEN_MAX];
+
+```
+
+When you call `get_next_line(fd)`, the function uses the integer `fd` as the index to access its specific memory slice. This allows you to read a line from `fd 3`, then switch to `fd 4`, and when you return to `fd 3`, the function remembers exactly where it left off.
+
+```
+       ┌──────────────────────────────┐
+       │   storage[OPEN_MAX] Array    │
+       └─┬───────────┬───────────┬────┘
+         │           │           │
+         ▼           ▼           ▼
+    [fd 3 Read] [fd 4 Read] [fd 5 Read]
+         │           │           │
+         ▼           ▼           ▼
+    "Line 1\n"  "Data A\n"  "Log 1\n"
+    "Line 2..." "Data B..." "Log 2..."
+
+```
+
+### ⚙️ Bonus Compilation Instructions
+
+To compile the bonus files, you must include the `_bonus` files instead of the standard ones. The `-D BUFFER_SIZE` flag remains mandatory.
+
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_utils_bonus.c main.c -o gnl_bonus_test
+
+```
+
+### Technical Considerations & Limits
+
+* **`OPEN_MAX`**: The header defines `OPEN_MAX = 1024` as a safe fallback limit, which represents the maximum number of concurrent files a process can typically open on a standard Linux system.
+* **Memory Optimization**: Memory is only allocated for a specific index when `read()` is called on that file descriptor. Once a file reaches EOF (End of File), its corresponding pointer `storage[fd]` is completely freed and reset to `NULL` to prevent idle memory consumption.
+
 
 ## 📚 Resources and AI Statement
 
