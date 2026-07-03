@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:28:50 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/29 19:46:24 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:18:51 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_BONUS_H
@@ -28,7 +28,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strndup(const char *s, size_t n);
 char	*ft_strchr(const char *s, int c);
 void	ft_copy_data(char *dest, const char *storage, const char *buffer);
-char	*ft_strjoin_with_free(char const *buffer, char *storage);
-char	*cut_excess(char *old_storage);
+char	*ft_strjoin(char const *buffer, char *storage, size_t size);
+char	*cut_excess(char *storage);
 
 #endif

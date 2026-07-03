@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/02 19:12:58 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/03 19:47:52 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -25,54 +25,76 @@ char	*cut_excess(char *storage)
 	return (new_storage);
 }
 
+char	*read_buffer(int fd, char *storage, char *buffer)
+{
+	ssize_t	nr_bytes;
+	size_t	size;
+
+	nr_bytes = 1;
+	size = ft_strlen(storage);
+	while (nr_bytes > 0)
+	{
+		nr_bytes = read(fd, buffer, BUFFER_SIZE);
+		if (nr_bytes == -1)
+			return (NULL);
+		buffer[nr_bytes] = '\0';
+		size = size + nr_bytes;
+		storage = ft_strjoin(buffer, storage, size);
+		if (ft_strchr(buffer, '\n'))
+			break ;
+	}
+	return (storage);
+}
+
 char	*fill_storage(int fd, char *storage)
 {
 	char	*buffer;
-	ssize_t	nr_bytes;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	nr_bytes = 1;
-	while (ft_strchr(storage, '\n') == NULL && nr_bytes > 0)
+	storage = read_buffer(fd, storage, buffer);
+	if (!storage)
 	{
-		nr_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (nr_bytes == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[nr_bytes] = '\0';
-		storage = ft_strjoin_with_free(buffer, storage);
+		free(buffer);
+		return (NULL);
 	}
 	free(buffer);
 	return (storage);
 }
 
+static char	*extract_line(char **storage)
+{
+	char	*line;
+	char	*check_line;
+
+	check_line = ft_strchr(*storage, '\n');
+	if (check_line)
+	{
+		line = ft_strndup(*storage, check_line - *storage + 1);
+		*storage = cut_excess(*storage);
+	}
+	else
+	{
+		line = ft_strndup(*storage, ft_strlen(*storage));
+		free(*storage);
+		*storage = NULL;
+	}
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
-	char		*line;
-	char		*check_line;
-	size_t		line_len;
 	static char	*storage[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	storage[fd] = fill_storage(fd, storage[fd]);
 	if (!storage[fd] || !*storage[fd])
-		return (NULL);
-	check_line = ft_strchr(storage[fd], '\n');
-	if (check_line)
 	{
-		line_len = check_line - storage[fd] + 1;
-		line = ft_strndup(storage[fd], line_len);
-		storage[fd] = cut_excess(storage[fd]);
-	}
-	else
-	{
-		line = ft_strndup(storage[fd], ft_strlen(storage[fd]));
 		free(storage[fd]);
 		storage[fd] = NULL;
+		return (NULL);
 	}
-	return (line);
+	return (extract_line(&storage[fd]));
 }

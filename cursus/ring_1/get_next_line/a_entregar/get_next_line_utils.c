@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 19:26:05 by dichacon          #+#    #+#             */
-/*   Updated: 2026/06/26 15:41:54 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:59:03 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -15,6 +15,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i])
 		i++;
@@ -76,25 +78,21 @@ void	ft_copy_data(char *dest, const char *storage, const char *buffer)
 	dest[i] = '\0';
 }
 
-char	*ft_strjoin_with_free(char const *buffer, char *storage)
+char	*ft_strjoin(char const *buffer, char *storage, size_t size)
 {
-	char	*merger;
-	size_t	size;
+	char	*new_storage;
 
 	if (!buffer && !storage)
 		return (NULL);
 	if (!storage)
 		storage = ft_strndup("", 0);
-	if (!storage)
-		return (NULL);
-	size = ft_strlen(buffer) + ft_strlen(storage) + 1;
-	merger = malloc(sizeof(char) * size);
-	if (!merger)
+	new_storage = malloc(sizeof(char) * (size + 1));
+	if (!new_storage)
 	{
 		free(storage);
 		return (NULL);
 	}
-	ft_copy_data(merger, storage, buffer);
+	ft_copy_data(new_storage, storage, buffer);
 	free(storage);
-	return (merger);
+	return (new_storage);
 }
