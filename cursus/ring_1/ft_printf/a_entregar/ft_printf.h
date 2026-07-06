@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 17:58:40 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/05 19:04:57 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/06 16:43:31 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FT_PRINTF_H
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 
 int	ft_printf(char const *format, ...);
-size_t	process_char(va_list *args);
+int	process_char(va_list *args);
+int	process_string(va_list *args);
 
 #endif

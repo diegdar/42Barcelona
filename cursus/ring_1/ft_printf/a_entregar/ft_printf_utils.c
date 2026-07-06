@@ -6,12 +6,12 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:05:37 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/05 19:51:56 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/06 16:54:56 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-size_t	process_char(va_list *args)
+int	process_char(va_list *args)
 {
 	char	c;
 
@@ -19,12 +19,19 @@ size_t	process_char(va_list *args)
 	write(1, &c, 1);
 	return (1); 
 }
-/*
-size_t	process_string(va_list *args)
+
+int	process_string(va_list *args)
 {
-	int	s;
+	char	*s;
+	int	i;
 
-	s = (char)va_arg(*arg, int);
-
+	s = va_arg(*args, char *);
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
 }
-*/
+
