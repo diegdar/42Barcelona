@@ -29,27 +29,3 @@ void	ft_putstr(char *s)
 	}
 }
 
-int	process_char(va_list *args)
-{
-	char	c;
-
-	c = (char)va_arg(*args, int);
-	ft_putchar(c);
-	return (1); 
-}
-
-int	process_str(va_list *args)
-{
-	char	*s;
-	int	i;
-
-	s = va_arg(*args, char *);
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
-	return (i);
-}
-

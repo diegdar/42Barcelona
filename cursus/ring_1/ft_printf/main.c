@@ -61,5 +61,11 @@ int	main(void)
 	TEST_PRINTF("El numero maximo de un unsigned int: '%X'", UINT_MAX);
 	TEST_PRINTF("Pasando un -1 a formato sin signo: '%X'", -1);
 
+// 7. PRUEBAS CON EL SÍMBOLO DEL PORCENTAJE (%%)
+	printf("--- CATEGORÍA: Símbolo de Porcentaje (%%%%) ---\n");
+	TEST_PRINTF("Un porcentaje simple: %%");
+	TEST_PRINTF("Tengo el 100%% de seguridad de que esto funciona");
+	TEST_PRINTF("Seis porcentajes seguidos: %%%%%%");
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 17:58:40 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/08 17:47:11 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/08 18:14:04 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FT_PRINTF_H
@@ -23,4 +23,5 @@ int	process_ptr(va_list *args);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
 int	process_hex(va_list *args, const char type);
+int	process_percent();
 #endif
