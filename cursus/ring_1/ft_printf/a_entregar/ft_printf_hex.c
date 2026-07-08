@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 18:59:48 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/08 17:11:48 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/08 17:50:21 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -46,14 +46,13 @@ int	process_ptr(va_list *args)
 	return (chars_num);
 }
 
-
-int	process_hex_lower(va_list *args)
+int	process_hex(va_list *args, char const type)
 {
 	int			chars_num;
 	unsigned long long	num;
 
 	chars_num = 0;
 	num = va_arg(*args, unsigned int);
-	chars_num += get_hex(num, 'x');
+	chars_num += get_hex(num, type);
 	return (chars_num);
 }

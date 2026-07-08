@@ -55,5 +55,11 @@ int	main(void)
 	TEST_PRINTF("El numero maximo de un unsigned int: '%x'", UINT_MAX);
 	TEST_PRINTF("Pasando un -1 a formato sin signo: '%x'", -1);
 
+	// 5. PRUEBAS CON VALOR HEXADECIMAL EN MAYÚSCULA (%X)
+	printf("--- CATEGORÍA: Hexadecimal Mayuscula (%%X) ---\n");
+	TEST_PRINTF("El numero 255 (deberia ser FF): '%X'", 255);
+	TEST_PRINTF("El numero maximo de un unsigned int: '%X'", UINT_MAX);
+	TEST_PRINTF("Pasando un -1 a formato sin signo: '%X'", -1);
+
 	return (0);
 }
