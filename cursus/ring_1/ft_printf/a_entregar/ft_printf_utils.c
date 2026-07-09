@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:05:37 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/09 14:54:54 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/09 15:46:21 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -23,4 +23,14 @@ void	ft_putstr(char *s)
 		write(1, s, 1);
 		s++; 
 	}
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

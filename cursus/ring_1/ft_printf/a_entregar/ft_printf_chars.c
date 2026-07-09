@@ -24,16 +24,15 @@ int	process_char(va_list *args)
 int	process_str(va_list *args)
 {
 	char	*s;
-	int	i;
 
 	s = va_arg(*args, char *);
-	i = 0;
-	while (s[i])
+	if (!s)
 	{
-		ft_putchar(s[i]);
-		i++;
+		ft_putstr("(null)");
+		return (6);
 	}
-	return (i);
+	ft_putstr(s);
+	return (ft_strlen(s));
 }
 
 int	process_percent()

@@ -22,8 +22,8 @@
 */
 #define TEST_PRINTF(format, ...) \
 	do { \
-		int res_ft = ft_printf("\t*ft_printf: " format "\n", ##__VA_ARGS__); \
 		int res_orig = printf("\t*printf:    " format "\n", ##__VA_ARGS__); \
+		int res_ft = ft_printf("\t*ft_printf: " format "\n", ##__VA_ARGS__); \
 		printf("\t**Retornos -> ft: %d | orig: %d\n\n", res_ft, res_orig); \
 	} while (0)
 
@@ -48,6 +48,8 @@ int	main(void)
 	printf("--- CATEGORÍA: Cadenas de texto (%%s) ---\n");
 	TEST_PRINTF("Un string normal: '%s'", "hello 42");
 	TEST_PRINTF("Un string vacio: '%s'", "");
+	char	*ptr_null = NULL;
+	TEST_PRINTF("Paso de un NULL: '%s'", ptr_null);
 
 	// 4. PRUEBAS CON VALOR HEXADECIMAL EN MINÚSCULA (%x)
 	printf("--- CATEGORÍA: Hexadecimal Minuscula (%%x) ---\n");
