@@ -6,7 +6,7 @@
 #    By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/04 17:51:21 by dichacon          #+#    #+#              #
-#    Updated: 2026/07/06 19:23:09 by dichacon         ###   ########.fr        #
+#    Updated: 2026/07/06 19:23:09 by dichacon         #   .fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME    = libftprintf.a
@@ -17,6 +17,7 @@ INC     = ft_printf.h
 SRC     = ft_printf.c \
 	ft_printf_utils.c \
 	ft_printf_chars.c \
+	ft_printf_nums.c \
 	ft_printf_hex.c
 
 OBJ     = $(SRC:.c=.o)
@@ -27,6 +28,7 @@ LIBFT     = $(LIBFT_DIR)/libft.a
 # Regla principal obligatoria
 all: $(NAME)
 
+$(NAME): $(LIBFT) $(OBJ)
 $(NAME): $(LIBFT) $(OBJ)
 	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJ)

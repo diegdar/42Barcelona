@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_nums.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
+/*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/05 18:05:37 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/09 05:47:41 by dichacon         ###   ########.fr       */
+/*   Created: 2026/07/08 19:24:18 by dichacon          #+#    #+#             */
+/*   Updated: 2026/07/09 05:48:46 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	process_int(va_list *args)
 {
-	if (!c)
-		return ;
-	write(1, &c, 1);
-}
+	long	num;
+	char	*num_char;
 
-void	ft_putstr(char *s)
-{
-	if (!s)
-		return ;
-	while (*s)
-	{
-		write(1, s, 1);
-		s++; 
-	}
+	num = va_arg(*args, int);
+	num_char = ft_itoa(num);
+	ft_putstr(num_char);
+	return (ft_strlen(num_char));
 }

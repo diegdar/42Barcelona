@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:05:15 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/08 18:13:26 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/09 10:46:59 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -25,6 +25,8 @@ int	parser_type(char const type, va_list *args)
 		return (process_hex(args, type));
 	else if (type == '%')
 		return (process_percent());
+	else if (type == 'd'|| type == 'i')
+		return (process_int(args));
 	else
 		return (-1);
 }

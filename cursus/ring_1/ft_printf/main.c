@@ -67,5 +67,14 @@ int	main(void)
 	TEST_PRINTF("Tengo el 100%% de seguridad de que esto funciona");
 	TEST_PRINTF("Seis porcentajes seguidos: %%%%%%");
 
+// 8. NUMERO DECIMAL TESTS (%d)
+	printf("--- CATEGORÍA: NUMERO DECIMAL (%%d) ---\n");
+	TEST_PRINTF("El numero cero en decimal: %d", 0);
+	TEST_PRINTF("Un numero entero positivo: %d", 42);
+	TEST_PRINTF("Un numero entero negativo: %d", -42);
+	TEST_PRINTF("El numero entero MAXIMO (positivo): %d", INT_MAX);
+	TEST_PRINTF("El numero entero MINIMO (negativo): %d", INT_MIN);
+
+
 	return (0);
 }

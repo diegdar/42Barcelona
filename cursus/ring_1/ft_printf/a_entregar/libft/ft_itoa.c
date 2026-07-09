@@ -12,7 +12,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static size_t	calculate_size(long n)
+size_t	ft_intlen(long n)
 {
 	size_t	count;
 
@@ -36,7 +36,7 @@ char	*ft_itoa(int n)
 	n_long = n;
 	if (n_long < 0)
 		n_long = -n_long;
-	size = calculate_size(n_long);
+	size = ft_intlen(n_long);
 	if (n < 0)
 		size++;
 	strnum = malloc(sizeof(char) * (size + 1));
