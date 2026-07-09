@@ -36,11 +36,12 @@ int	main(void)
 	// 1. TESTS SIN PARÁMETROS (TEXTO PLANO)
 	printf("--- CATEGORÍA: Texto Plano ---\n");
 	TEST_PRINTF("Impresion limpia sin ningun tipo de dato");
-	TEST_PRINTF("Texto con espacios y Simbolos! @#$^&*()");
+	TEST_PRINTF("Texto con espacios y Simbolos!: @#$^&*()");
 
 	// 2. CHAR TESTS (%c)
 	printf("--- CATEGORÍA: Caracteres (%%c) ---\n");
 	TEST_PRINTF("Un char basico: '%c'", 'A');
+	TEST_PRINTF("Paso de chars y numeros: '%c', '%c', '%c' ", '0', 0, '1');
 	TEST_PRINTF("Un char de la tabla ASCII extendida: '%c'", 126);
 
 	// 3. STRING TESTS (%s)
@@ -75,6 +76,22 @@ int	main(void)
 	TEST_PRINTF("El numero entero MAXIMO (positivo): %d", INT_MAX);
 	TEST_PRINTF("El numero entero MINIMO (negativo): %d", INT_MIN);
 
+// 9. NUMERO DECIMAL TESTS (%i)
+	printf("--- CATEGORÍA: NUMERO DECIMAL (%%i) ---\n");
+	TEST_PRINTF("El numero cero en decimal: %i", 0);
+	TEST_PRINTF("Un numero entero positivo: %i", 42);
+	TEST_PRINTF("Un numero entero negativo: %i", -42);
+	TEST_PRINTF("El numero entero MAXIMO (positivo): %i", INT_MAX);
+	TEST_PRINTF("El numero entero MINIMO (negativo): %i", INT_MIN);
 
+
+// 10. NUMERO ENTERO SIN SIGNO TESTS (%u)
+	printf("--- CATEGORÍA: NUMERO ENTERO SIN SIGNO (%%u) ---\n");
+	TEST_PRINTF("El numero cero en decimal: %u", 0);
+	TEST_PRINTF("Un numero entero positivo: %u", 42);
+	TEST_PRINTF("Un numero entero negativo: %u", -1);
+	TEST_PRINTF("El numero entero MAXIMO (positivo): %u", INT_MAX);
+	TEST_PRINTF("El numero entero MINIMO (negativo): %u", INT_MIN)
+;
 	return (0);
 }

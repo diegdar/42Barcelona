@@ -22,40 +22,30 @@ SRC     = ft_printf.c \
 
 OBJ     = $(SRC:.c=.o)
 
-LIBFT_DIR = libft
-LIBFT     = $(LIBFT_DIR)/libft.a
-
 # Regla principal obligatoria
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-$(NAME): $(LIBFT) $(OBJ)
-	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c Makefile $(INC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT):
-	make -C $(LIBFT_DIR)
-
 clean:
 	rm -f $(OBJ)
-	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-# --- REGLA DE PRUEBAS AUTOMÁTICA ---
+# --- REGLA DE PRUEBAS AUTOMÁTICAS ---
 test: $(NAME)
 	$(CC) $(CFLAGS) -I . ../main.c $(NAME) -o ../test_printf
 	./../test_printf
 	@echo "✨ ¡Test compilado en la carpeta superior!"
 
-# --- NUEVA REGLA PARA DEBUGAR CON GDB ---
+# --- REGLA PARA DEBUGAR CON GDB ---
 debug: CFLAGS += -g3
 debug: re
 	$(CC) $(CFLAGS) -I . ../main.c $(NAME) -o ../test_printf
