@@ -6,14 +6,14 @@
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 19:24:18 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/09 14:26:43 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/09 17:03:38 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
 int	process_int(long long num)
 {
-	int chars_num;
+	int		chars_num;
 	char	c;
 
 	chars_num = 0;
@@ -23,7 +23,6 @@ int	process_int(long long num)
 		num *= -1;
 		chars_num++;
 	}
-
 	if (num >= 10)
 		chars_num += process_int(num / 10);
 	c = (num % 10) + '0';

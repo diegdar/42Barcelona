@@ -18,7 +18,7 @@ int	process_char(va_list *args)
 
 	c = (char)va_arg(*args, int);
 	ft_putchar(c);
-	return (1); 
+	return (1);
 }
 
 int	process_str(va_list *args)
@@ -33,10 +33,4 @@ int	process_str(va_list *args)
 	}
 	ft_putstr(s);
 	return (ft_strlen(s));
-}
-
-int	process_percent()
-{
-	ft_putchar('%');
-	return (1);
 }

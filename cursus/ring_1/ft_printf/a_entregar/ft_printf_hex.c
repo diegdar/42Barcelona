@@ -6,15 +6,15 @@
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 18:59:48 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/08 17:50:21 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/09 17:06:58 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
 int	get_hex(unsigned long long num, char format)
 {
-	char *base;
-	int	chars_num;
+	char	*base;
+	int		chars_num;
 
 	chars_num = 0;
 	if (format == 'X')
@@ -30,8 +30,8 @@ int	get_hex(unsigned long long num, char format)
 
 int	process_ptr(va_list *args)
 {
-	unsigned long long ptr;
-	int			chars_num;
+	unsigned long long	ptr;
+	int					chars_num;
 
 	chars_num = 0;
 	ptr = va_arg(*args, unsigned long long);
@@ -48,7 +48,7 @@ int	process_ptr(va_list *args)
 
 int	process_hex(va_list *args, char const type)
 {
-	int			chars_num;
+	int					chars_num;
 	unsigned long long	num;
 
 	chars_num = 0;

@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:05:37 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/09 15:46:21 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/09 17:02:21 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -20,8 +20,8 @@ void	ft_putstr(char *s)
 {
 	while (*s)
 	{
-		write(1, s, 1);
-		s++; 
+		ft_putchar(*s);
+		s++;
 	}
 }
 
