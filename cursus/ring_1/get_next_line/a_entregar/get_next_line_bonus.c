@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/03 19:47:52 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/10 18:40:39 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -22,6 +22,7 @@ char	*cut_excess(char *storage)
 		i++;
 	new_storage = ft_strndup(&storage[i + 1], ft_strlen(&storage[i + 1]));
 	free(storage);
+	storage = NULL;
 	return (new_storage);
 }
 
@@ -57,9 +58,11 @@ char	*fill_storage(int fd, char *storage)
 	if (!storage)
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	free(buffer);
+	buffer = NULL;
 	return (storage);
 }
 
