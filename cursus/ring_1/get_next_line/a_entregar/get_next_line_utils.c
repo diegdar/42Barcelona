@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 19:26:05 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/03 18:59:03 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/11 18:01:01 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -90,9 +90,11 @@ char	*ft_strjoin(char const *buffer, char *storage, size_t size)
 	if (!new_storage)
 	{
 		free(storage);
+		storage = NULL;
 		return (NULL);
 	}
 	ft_copy_data(new_storage, storage, buffer);
 	free(storage);
+	storage = NULL;
 	return (new_storage);
 }

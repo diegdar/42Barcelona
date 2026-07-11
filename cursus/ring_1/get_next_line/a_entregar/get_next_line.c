@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 19:17:39 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/10 18:20:10 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/11 18:11:05 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -37,13 +37,7 @@ char	*read_buffer(int fd, char *storage, char *buffer)
 	{
 		nr_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (nr_bytes == -1)
-		{
-			free(storage);
-			free(buffer);
-			buffer = NULL;
-			storage = NULL;
 			return (NULL);
-		}
 		buffer[nr_bytes] = '\0';
 		size = size + nr_bytes;
 		storage = ft_strjoin(buffer, storage, size);
@@ -62,7 +56,13 @@ char	*fill_storage(int fd, char *storage)
 		return (NULL);
 	storage = read_buffer(fd, storage, buffer);
 	if (!storage)
+	{
+		free(buffer);
+		buffer = NULL;
+		free(storage);
+		storage = NULL;
 		return (NULL);
+	}
 	free(buffer);
 	buffer = NULL;
 	return (storage);

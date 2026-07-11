@@ -6,7 +6,7 @@
 /*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/10 18:40:39 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/11 18:01:43 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -59,6 +59,8 @@ char	*fill_storage(int fd, char *storage)
 	{
 		free(buffer);
 		buffer = NULL;
+		free(storage);
+		storage = NULL;
 		return (NULL);
 	}
 	free(buffer);
