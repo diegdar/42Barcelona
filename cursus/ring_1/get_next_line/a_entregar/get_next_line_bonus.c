@@ -3,69 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
+/*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 16:33:07 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/11 18:01:43 by dichacon         ###   ########.fr       */
+/*   Created: 2026/07/04 12:05:18 by dichacon          #+#    #+#             */
+/*   Updated: 2026/07/14 22:38:35 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 #include <unistd.h>
 
-char	*cut_excess(char *storage)
+static char	*clean_storage(char **storage)
 {
-	char	*new_storage;
-	size_t	i;
-
-	i = 0;
-	while (storage[i] != '\n')
-		i++;
-	new_storage = ft_strndup(&storage[i + 1], ft_strlen(&storage[i + 1]));
-	free(storage);
-	storage = NULL;
-	return (new_storage);
+	free(*storage);
+	*storage = NULL;
+	return (NULL);
 }
 
-char	*read_buffer(int fd, char *storage, char *buffer)
+char	*read_buffer(int fd, char **storage, char *buffer)
 {
 	ssize_t	nr_bytes;
-	size_t	size;
+	char	*temp;
 
+	if (ft_strchr(*storage, '\n'))
+		return (*storage);
 	nr_bytes = 1;
-	size = ft_strlen(storage);
 	while (nr_bytes > 0)
 	{
 		nr_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (nr_bytes == -1)
-			return (NULL);
+			return (clean_storage(storage));
+		if (nr_bytes == 0)
+			break ;
 		buffer[nr_bytes] = '\0';
-		size = size + nr_bytes;
-		storage = ft_strjoin(buffer, storage, size);
+		temp = ft_strjoin(*storage, buffer);
+		if (!temp)
+			return (clean_storage(storage));
+		free(*storage);
+		*storage = temp;
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	return (storage);
+	return (*storage);
 }
 
-char	*fill_storage(int fd, char *storage)
+char	*fill_storage(int fd, char **storage)
 {
 	char	*buffer;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (NULL);
-	storage = read_buffer(fd, storage, buffer);
-	if (!storage)
-	{
-		free(buffer);
-		buffer = NULL;
-		free(storage);
-		storage = NULL;
-		return (NULL);
-	}
+		return (clean_storage(storage));
+	*storage = read_buffer(fd, storage, buffer);
 	free(buffer);
-	buffer = NULL;
-	return (storage);
+	return (*storage);
 }
 
 static char	*extract_line(char **storage)
@@ -73,17 +64,20 @@ static char	*extract_line(char **storage)
 	char	*line;
 	char	*check_line;
 
+	if (!*storage || !**storage)
+		return (clean_storage(storage));
 	check_line = ft_strchr(*storage, '\n');
 	if (check_line)
 	{
 		line = ft_strndup(*storage, check_line - *storage + 1);
+		if (!line)
+			return (clean_storage(storage));
 		*storage = cut_excess(*storage);
 	}
 	else
 	{
 		line = ft_strndup(*storage, ft_strlen(*storage));
-		free(*storage);
-		*storage = NULL;
+		clean_storage(storage);
 	}
 	return (line);
 }
@@ -94,12 +88,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	storage[fd] = fill_storage(fd, storage[fd]);
-	if (!storage[fd] || !*storage[fd])
-	{
-		free(storage[fd]);
-		storage[fd] = NULL;
+	storage[fd] = fill_storage(fd, &storage[fd]);
+	if (!storage[fd])
 		return (NULL);
-	}
 	return (extract_line(&storage[fd]));
 }

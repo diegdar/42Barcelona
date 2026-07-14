@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dichacon <dichacon@student.42barcelon      +#+  +:+       +#+        */
+/*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 19:26:05 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/11 18:01:01 by dichacon         ###   ########.fr       */
+/*   Created: 2026/07/03 12:33:17 by dichacon          #+#    #+#             */
+/*   Updated: 2026/07/14 22:35:08 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -58,43 +58,50 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	ft_copy_data(char *dest, const char *storage, const char *buffer)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	char	*new_str;
 	size_t	i;
+	size_t	j;
 
+	new_str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!new_str)
+		return (NULL);
 	i = 0;
-	while (*storage)
+	if (s1)
 	{
-		dest[i] = *storage;
-		storage++;
-		i++;
+		while (s1[i])
+		{
+			new_str[i] = s1[i];
+			i++;
+		}
 	}
-	while (*buffer)
+	j = 0;
+	if (s2)
 	{
-		dest[i] = *buffer;
-		buffer++;
-		i++;
+		while (s2[j])
+			new_str[i++] = s2[j++];
 	}
-	dest[i] = '\0';
+	new_str[i] = '\0';
+	return (new_str);
 }
 
-char	*ft_strjoin(char const *buffer, char *storage, size_t size)
+char	*cut_excess(char *storage)
 {
 	char	*new_storage;
+	size_t	i;
 
-	if (!buffer && !storage)
-		return (NULL);
 	if (!storage)
-		storage = ft_strndup("", 0);
-	new_storage = malloc(sizeof(char) * (size + 1));
-	if (!new_storage)
+		return (NULL);
+	i = 0;
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	if (!storage[i] || !storage[i + 1])
 	{
 		free(storage);
-		storage = NULL;
 		return (NULL);
 	}
-	ft_copy_data(new_storage, storage, buffer);
+	new_storage = ft_strndup(&storage[i + 1], ft_strlen(&storage[i + 1]));
 	free(storage);
-	storage = NULL;
 	return (new_storage);
 }

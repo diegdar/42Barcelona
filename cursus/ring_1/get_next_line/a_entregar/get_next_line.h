@@ -19,12 +19,11 @@
 #  define BUFFER_SIZE 4096 
 # endif
 
-char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
+char	*cut_excess(char *storage);
+char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strndup(const char *s, size_t n);
 char	*ft_strchr(const char *s, int c);
-void	ft_copy_data(char *dest, const char *storage, const char *buffer);
-char	*ft_strjoin(char const *buffer, char *storage, size_t size);
-char	*cut_excess(char *storage);
+size_t	ft_strlen(const char *s);
+char	*get_next_line(int fd);
 
 #endif
