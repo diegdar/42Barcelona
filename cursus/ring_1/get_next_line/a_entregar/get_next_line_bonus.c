@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 {
 	static char	*storage[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
 	storage[fd] = fill_storage(fd, &storage[fd]);
 	if (!storage[fd])

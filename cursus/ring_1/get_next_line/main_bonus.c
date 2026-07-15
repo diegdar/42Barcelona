@@ -6,7 +6,7 @@
 
 void	read_interleaved(int *fds, int count)
 {
-	char	*line;
+	char		*line;
 	int		i;
 	int		keep_reading;
 
@@ -32,7 +32,7 @@ void	read_interleaved(int *fds, int count)
 int	main(int argc, char **argv)
 {
 	int	fds[argc - 1]; 
-	int fd_term;
+	int	fd_term;
 	int	num_files;
 	int	i;
 
