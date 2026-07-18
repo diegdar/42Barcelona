@@ -8,35 +8,38 @@ The `ft_printf` project is a custom implementation of the standard C library `pr
 ## File Structure Overview
 - `ft_printf.c`: Contains the main entry point and format parsing loop.
 - `ft_printf.h`: Header file containing prototypes, macros, and standard includes.
-- `ft_printf_chars.c`: Handles character and string printing operations.
-- `ft_printf_hex.c`: Implements hexadecimal translations and pointer formatting.
-- `ft_printf_nums.c`: Implements signed and unsigned base-10 integer outputs.
-- `ft_printf_utils.c`: Contains low-level helper functions for standard conversions.
+- `process_chars.c`: Handles character and string printing operations.
+- `process_hex.c`: Implements hexadecimal translations and pointer formatting.
+- `process_nums.c`: Implements signed and unsigned base-10 integer outputs.
+- `process_utils.c`: Contains low-level helper functions for standard conversions.
 
 ## Technical Decisions: Algorithms & Data Structures
 - **Parsing Algorithm:** The project uses a single-pass sequential scanning algorithm. It iterates through the format string character by character. When a `%` symbol is encountered, it dispatches the control flow to specialized conversion functions using a variadic argument list (`va_list`).
 - **Data Structures:** Variadic arguments are handled using the standard `va_list` structure defined in `<stdarg.h>`. The architecture avoids dynamic allocations where possible, directly printing to the standard output to optimize performance and prevent memory leaks.
 - **Hexadecimal Handling:** Lowercase and uppercase conversions share the same underlying base-16 conversion algorithm, utilizing a flag argument to switch character arrays.
 
-## Call Graph
+## Call Graph & Execution Flow
 ```text
-ft_printf (Entry Point)
-   │
-   ├──► Handle Chars (ft_printf_chars.c)
-   │     ├──► ft_print_char
-   │     └──► ft_print_str
-   │
-   ├──► Handle Hex   (ft_printf_hex.c)
-   │     ├──► ft_print_ptr
-   │     └──► ft_print_hex
-   │
-   ├──► Handle Nums  (ft_printf_nums.c)
-   │     ├──► ft_print_int
-   │     └──► ft_print_unsigned
-   │
-   └──► Utilities    (ft_printf_utils.c)
-         └──► Helper functions
+                       ┌──────────────────────────┐
+                       │  ft_printf (Entry Point) │
+                       └─────────────┬────────────┘
+                                     │
+            ┌────────────────────────┼──────────────────────────┐
+            ▼                        ▼                          ▼
+  ┌───────────────────┐        ┌───────────────────┐  ┌───────────────────┐
+  │ process_chars.c   │        │  process_hex.c    │  │  process_nums.c   │
+  └─────────┬─────────┘        └─────────┬─────────┘  └─────────┬─────────┘
+            │                            │                      │
+     ┌──────┴──────┐              ┌──────┴──────┐        ┌──────┴──────┐
+     ▼             ▼              ▼             ▼        ▼             ▼
+     process_char		  process_ptr		 process_int
+     process_str 		  process_hex
 ```
+### Call Graph Explanation
+1. **Entry Point (`ft_printf.c`):** Scans the input string sequentially. When a `%` format specifier is found, it extracts the next variable argument from the `va_list` and branches out based on the specifier character.
+2. **Character Module (`process_chars.c`):** If `%c` or `%s` is matched, control flows to `process_char` or `process_str`. They handle character stream printing and forward length counts back to the entry point.
+3. **Hexadecimal Module (`process_hex.c`):** Triggered by `%x`, `%X`, or `%p`. Addresses are formatted via `process_ptr` adding the `0x` prefix, while general hexadecimal values are converted via `process_hex`.
+4. **Numeric Module (`process_nums.c`):** Handles integer bases with `%d`, `%i`, or `%u` specifiers by invoking standard signed (`process_int`) or unsigned (`process_unsigned`) conversion algorithms.
 
 ## Function Descriptions
 
@@ -47,38 +50,38 @@ ft_printf (Entry Point)
   - `...`: A variable number of arguments corresponding to the specifiers.
 - **Return Value:** The total count of characters written to stdout, or `-1` if an error occurs.
 
-### 2. `int ft_print_char(char c)`
+### 2. `int process_char(char c)`
 - **Description:** Outputs a single character to standard output.
 - **Parameters:**
   - `c`: The character to display.
 - **Return Value:** The number of characters printed (always 1).
 
-### 3. `int ft_print_str(char *s)`
+### 3. `int process_str(char *s)`
 - **Description:** Iterates through a string and outputs each character to stdout. Handles NULL strings safely.
 - **Parameters:**
   - `s`: Pointer to the string to display.
 - **Return Value:** The length of the string printed, or 6 if the string is NULL (printing "(null)").
 
-### 4. `int ft_print_int(int n)`
+### 4. `int process_int(int n)`
 - **Description:** Converts a signed integer into its ASCII representation and prints it.
 - **Parameters:**
   - `n`: The signed integer value to output.
 - **Return Value:** Total count of digits and signs printed.
 
-### 5. `int ft_print_unsigned(unsigned int n)`
+### 5. `int process_unsigned(unsigned int n)`
 - **Description:** Converts an unsigned integer into its ASCII representation and prints it.
 - **Parameters:**
   - `n`: The unsigned integer value to output.
 - **Return Value:** Total count of digits printed.
 
-### 6. `int ft_print_hex(unsigned int n, char format)`
+### 6. `int process_hex(unsigned int n, char format)`
 - **Description:** Converts an unsigned integer into a base-16 string (hexadecimal) and prints it.
 - **Parameters:**
   - `n`: The value to convert.
   - `format`: Character ('x' or 'X') indicating lowercase or uppercase formatting.
 - **Return Value:** Total hexadecimal digits printed.
 
-### 7. `int ft_print_ptr(unsigned long long ptr)`
+### 7. `int process_ptr(unsigned long long ptr)`
 - **Description:** Formats a pointer memory address into hexadecimal notation prefixed with "0x".
 - **Parameters:**
   - `ptr`: The memory address to convert and print.
@@ -89,7 +92,7 @@ ft_printf (Entry Point)
 ### Manual Compilation
 To compile all the source files manually without using the Makefile configuration, execute the following terminal command:
 ```bash
-cc -Wall -Wextra -Werror ft_printf.c ft_printf_chars.c ft_printf_hex.c ft_printf_nums.c ft_printf_utils.c -c
+cc -Wall -Wextra -Werror ft_printf.c process_chars.c process_hex.c process_nums.c process_utils.c -c
 ar rcs libftprintf.a *.o
 ```
 
