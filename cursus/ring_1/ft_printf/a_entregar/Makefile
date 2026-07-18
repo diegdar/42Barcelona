@@ -41,15 +41,15 @@ re: fclean all
 
 # --- REGLA DE PRUEBAS AUTOMÁTICAS ---
 test: $(NAME)
-	$(CC) $(CFLAGS) -I . ../main.c $(NAME) -o ../test_printf
-	./../test_printf
-	@echo "✨ ¡Test compilado en la carpeta superior!"
+	$(CC) $(CFLAGS) main.c $(NAME) -o test_printf
+	./test_printf
+	@echo "✨ ¡Test compilado!"
 
 # --- REGLA PARA DEBUGAR CON GDB ---
 debug: CFLAGS += -g3
 debug: re
-	$(CC) $(CFLAGS) -I . ../main.c $(NAME) -o ../test_printf
-	gdb ../test_printf
+	$(CC) $(CFLAGS) main.c $(NAME) -o test_printf
+	gdb test_printf
 	@echo "🐛 Compilado en modo DEBUG con -g3. Listo para GDB."
 
 .PHONY: all clean fclean re test debug

@@ -34,7 +34,7 @@ int	process_ptr(va_list *args)
 	int					chars_num;
 
 	chars_num = 0;
-	ptr = va_arg(*args, unsigned long long);
+	ptr = (unsigned long long)va_arg(*args, void *);
 	if (ptr == 0)
 	{
 		ft_putstr("(nil)");
