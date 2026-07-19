@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	process_char(va_list *args)
+int	print_char(va_list *args)
 {
 	char	c;
 
@@ -21,7 +21,7 @@ int	process_char(va_list *args)
 	return (1);
 }
 
-int	process_str(va_list *args)
+int	print_str(va_list *args)
 {
 	char	*s;
 

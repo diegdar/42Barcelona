@@ -28,7 +28,7 @@ int	get_hex(unsigned long long num, char format)
 	return (chars_num);
 }
 
-int	process_ptr(va_list *args)
+int	print_ptr(va_list *args)
 {
 	unsigned long long	ptr;
 	int					chars_num;
@@ -46,7 +46,7 @@ int	process_ptr(va_list *args)
 	return (chars_num);
 }
 
-int	process_hex(va_list *args, char const type)
+int	print_hex(va_list *args, char const type)
 {
 	int					chars_num;
 	unsigned long long	num;

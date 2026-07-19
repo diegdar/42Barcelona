@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_nums.c                                   :+:      :+:    :+:   */
+/*   process_nums.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dichacon <dichacon@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 19:24:18 by dichacon          #+#    #+#             */
-/*   Updated: 2026/07/09 17:03:38 by dichacon         ###   ########.fr       */
+/*   Updated: 2026/07/19 13:00:39 by dichacon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	process_int(long long num)
+int	print_int(long long num)
 {
 	int		chars_num;
 	char	c;
@@ -24,7 +24,7 @@ int	process_int(long long num)
 		chars_num++;
 	}
 	if (num >= 10)
-		chars_num += process_int(num / 10);
+		chars_num += print_int(num / 10);
 	c = (num % 10) + '0';
 	ft_putchar(c);
 	chars_num++;

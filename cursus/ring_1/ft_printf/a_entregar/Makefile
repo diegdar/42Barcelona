@@ -16,9 +16,9 @@ INC     = ft_printf.h
 
 SRC     = ft_printf.c \
 	ft_printf_utils.c \
-	ft_printf_chars.c \
-	ft_printf_nums.c \
-	ft_printf_hex.c
+	process_chars.c \
+	process_nums.c \
+	process_hex.c
 
 OBJ     = $(SRC:.c=.o)
 
